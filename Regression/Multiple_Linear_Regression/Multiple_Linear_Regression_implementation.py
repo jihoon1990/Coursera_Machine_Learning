@@ -69,7 +69,7 @@ step_size = 4e-12
 tolerance = 1e9
 
 print()
-# Modeling
+# Weights for MLR Model
 MLR_weights = regression_gradient_descent(train_feature_matrix,output,initial_weights,step_size,tolerance)
 print("Weights: ", MLR_weights)
 

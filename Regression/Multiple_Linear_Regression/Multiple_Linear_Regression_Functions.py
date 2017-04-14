@@ -42,17 +42,3 @@ def regression_gradient_descent(feature_matrix, output, initial_weights, step_si
         if gradient_magnitude < tolerance:
             converged = True
     return weights
-
-def get_numpy_data(data_sframe, features, output):
-    data_sframe['constant'] = 1 # add a constant column
-    # prepend variable 'constant' to the features list
-    features = ['constant'] + features
-    # select the columns of data_SFrame given by the ‘features’
-
-    # this will convert the features_sframe into a numpy matrix with GraphLab Create >= 1.7!!
-    features_matrix = features_sframe.to_numpy()
-    # assign the column of data_sframe associated with the target to the variable ‘output_sarray’
-
-    # this will convert the SArray into a numpy array:
-    output_array = output_sarray.to_numpy() # GraphLab Create>= 1.7!!
-    return(features_matrix, output_array)
