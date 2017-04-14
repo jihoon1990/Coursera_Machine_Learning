@@ -90,7 +90,7 @@ print("Intercepts: ", model_3.intercept_)
 coeffs = pd.DataFrame(list(zip(model_3_x_train.columns,model_3.coef_)), columns = ['features', 'estimated coefficients'])
 print(coeffs)
 
-## Prediction
+## Assign Test Data Set
 model_1_x_test = test_data[['sqft_living', 'bedrooms', 'bathrooms', 'lat', 'long']]
 model_1_y_test = test_data['price']
 model_2_x_test = test_data[['sqft_living', 'bedrooms', 'bathrooms', 'lat', 'long', 'bed_bath_rooms']]
