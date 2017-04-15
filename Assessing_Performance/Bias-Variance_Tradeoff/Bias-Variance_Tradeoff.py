@@ -56,7 +56,7 @@ plt.xlabel('Squarefeet')
 plt.ylabel('Price')
 plt.show()
 
-# 2nd degree polynomial
+# 2nd degree of  polynomial
 poly2_data = polynomial_dataframe(sales['sqft_living'], 2)
 poly2_data['price'] = sales['price']
 model2 = linear_model.LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
@@ -143,7 +143,7 @@ print("Coefficients: ", model_set2.intercept_)
 coeffs = pd.DataFrame(list(zip(poly_set2.drop('price',1).columns,model_set2.coef_)), columns = ['features', 'estimated coefficients'])
 print(coeffs)
 
-# Scatter plot of set1 data
+# Scatter plot of set 2 data
 plt.figure(5)
 plt.plot(poly_set2[['power_1']], poly_set2[['price']],'.',
          poly_set2[['power_1']], model_set2.predict(poly_set2.drop('price',1)),'-')
@@ -162,7 +162,7 @@ print("Coefficients: ", model_set3.intercept_)
 coeffs = pd.DataFrame(list(zip(poly_set3.drop('price',1).columns,model_set3.coef_)), columns = ['features', 'estimated coefficients'])
 print(coeffs)
 
-# Scatter plot of set1 data
+# Scatter plot of set 3 data
 plt.figure(6)
 plt.plot(poly_set3[['power_1']], poly_set3[['price']],'.',
          poly_set3[['power_1']], model_set3.predict(poly_set3.drop('price',1)),'-')
@@ -181,7 +181,7 @@ print("Coefficients: ", model_set4.intercept_)
 coeffs = pd.DataFrame(list(zip(poly_set4.drop('price',1).columns,model_set4.coef_)), columns = ['features', 'estimated coefficients'])
 print(coeffs)
 
-# Scatter plot of set1 data
+# Scatter plot of set 4 data
 plt.figure(7)
 plt.plot(poly_set4[['power_1']], poly_set4[['price']],'.',
          poly_set4[['power_1']], model_set4.predict(poly_set4.drop('price',1)),'-')
