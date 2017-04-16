@@ -27,12 +27,13 @@ def polynomial_dataframe(feature, degree): # feature is pandas.Series type
     return poly_dataframe
 
 def ridge_model(alpha,x,y):
-    model = linear_model.Ridge(alpha = alpha)
+    model = linear_model.Ridge(alpha = alpha, normalize = True)
     model.fit(x,y)
+    return model
+
     print("Intercepts: ", model.intercept_)
     coeffs = pd.DataFrame(list(zip(x.columns,model.coef_)), columns = ['features', 'estimated coefficients'])
     print(coeffs)
-    return model
     
 def plot_fitted_line(n,set_data,model):
     plt.figure(n)
