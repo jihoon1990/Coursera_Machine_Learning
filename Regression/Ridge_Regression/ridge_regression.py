@@ -34,71 +34,71 @@ train_valid_shuffled = pd.read_csv("kc_house_train_valid_shuffled.csv", dtype = 
 
 # Linear Regression with small l2 penalty
 sales = sales.sort_values(['sqft_living','price'])
-sales_data = polynomial_dataframe(sales['sqft_living'], 11)
+sales_data = polynomial_dataframe(sales['sqft_living'], 15)
 sales_data['price'] = sales['price']
-l2_small_penalty = 1e-5
+l2_small_penalty = 1.5e-5
 model1 = ridge_model(l2_small_penalty, sales_data.drop('price',1), sales_data['price'])
 plot_fitted_line(0,sales_data,model1)
 
 # Observe Overfitting
 # Set 1
 print()
-poly_set1 = polynomial_dataframe(set1['sqft_living'],11)
+poly_set1 = polynomial_dataframe(set1['sqft_living'],15)
 poly_set1['price'] = set1['price']
 model_set1 = ridge_model(l2_small_penalty,poly_set1.drop('price',1),poly_set1['price'])
 plot_fitted_line(1,poly_set1,model_set1)
 
 # Set 2
 print()
-poly_set2 = polynomial_dataframe(set2['sqft_living'],11)
+poly_set2 = polynomial_dataframe(set2['sqft_living'],15)
 poly_set2['price'] = set2['price']
 model_set2 = ridge_model(l2_small_penalty,poly_set2.drop('price',1),poly_set2['price'])
 plot_fitted_line(2,poly_set2,model_set2)
 
 # Set 3
 print()
-poly_set3 = polynomial_dataframe(set3['sqft_living'],11)
+poly_set3 = polynomial_dataframe(set3['sqft_living'],15)
 poly_set3['price'] = set3['price']
 model_set3 = ridge_model(l2_small_penalty,poly_set3.drop('price',1),poly_set3['price'])
 plot_fitted_line(3,poly_set3,model_set3)
 
 # Set 4
 print()
-poly_set4 = polynomial_dataframe(set4['sqft_living'],11)
+poly_set4 = polynomial_dataframe(set4['sqft_living'],15)
 poly_set4['price'] = set4['price']
 model_set4 = ridge_model(l2_small_penalty,poly_set4.drop('price',1),poly_set4['price'])
 plot_fitted_line(4,poly_set4,model_set4)
 
 ## Apply Ridge Regression
 # Generally, whenever we see weights change so much in response to change in data, we believe the variance of our estimate to be large. Ridge regression aims to address this issue by penalizing "large" weights.
-l2_new_penalty = 1e78
+l2_new_penalty = 1.0e1
 # Set 1
 print()
-poly_set1 = polynomial_dataframe(set1['sqft_living'],11)
+poly_set1 = polynomial_dataframe(set1['sqft_living'],15)
 poly_set1['price'] = set1['price']
 model_set1 = ridge_model(l2_new_penalty,poly_set1.drop('price',1),poly_set1['price'])
-plot_fitted_line(1,poly_set1,model_set1)
+plot_fitted_line(5,poly_set1,model_set1)
 
 # Set 2
 print()
-poly_set2 = polynomial_dataframe(set2['sqft_living'],11)
+poly_set2 = polynomial_dataframe(set2['sqft_living'],15)
 poly_set2['price'] = set2['price']
 model_set2 = ridge_model(l2_new_penalty,poly_set2.drop('price',1),poly_set2['price'])
-plot_fitted_line(2,poly_set2,model_set2)
+plot_fitted_line(6,poly_set2,model_set2)
 
 # Set 3
 print()
-poly_set3 = polynomial_dataframe(set3['sqft_living'],11)
+poly_set3 = polynomial_dataframe(set3['sqft_living'],15)
 poly_set3['price'] = set3['price']
 model_set3 = ridge_model(l2_new_penalty,poly_set3.drop('price',1),poly_set3['price'])
-plot_fitted_line(3,poly_set3,model_set3)
+plot_fitted_line(7,poly_set3,model_set3)
 
 # Set 4
 print()
-poly_set4 = polynomial_dataframe(set4['sqft_living'],11)
+poly_set4 = polynomial_dataframe(set4['sqft_living'],15)
 poly_set4['price'] = set4['price']
 model_set4 = ridge_model(l2_new_penalty,poly_set4.drop('price',1),poly_set4['price'])
-plot_fitted_line(4,poly_set4,model_set4)
+plot_fitted_line(8,poly_set4,model_set4)
 
 # Curves with L2 regularization varies much less than without regularization
 
@@ -112,12 +112,12 @@ plot_fitted_line(4,poly_set4,model_set4)
 # After this process, we compute the average of the k validation errors, and use it as an estimate of the generalization error. Notice that all observations are used for both training and validation, as we iterate over segments of data.
 # To estimate the generalization error well, it is crucial to shuffle the training data before dividing them into segments. GraphLab Create has a utility function for shuffling a given SFrame. We reserve 10% of the data as the test set and shuffle the remainder. (Make sure to use seed=1 to get consistent answer.)
 
-poly_data = polynomial_dataframe(train_valid_shuffled['sqft_living'], 15)
-poly_data['price'] = train_valid_shuffled['price']
+poly_valid = polynomial_dataframe(train_valid_shuffled['sqft_living'], 15)
+poly_valid['price'] = train_valid_shuffled['price']
 
 val_err_dict = {}
-for l2_penalty in np.logspace(70, 85, num=100):
-    val_err = k_fold_cross_validation(10, l2_penalty, poly_data)    
+for l2_penalty in np.logspace(5,6, num=100):
+    val_err = k_fold_cross_validation(10, l2_penalty, poly_valid)    
     val_err_dict[l2_penalty] = val_err
 
 l2_penalty = val_err_dict.keys()
@@ -130,16 +130,20 @@ plt.xlabel('L2 penalty')
 plt.ylabel('error')
 
 optimal_penalty = min(val_err_dict.items(), key = lambda x:x[1])
-print("Optimal L2 Penalty: ", optimal_penalty)
 
 # Linear Regression with optimal L2 penalty
 sales = sales.sort_values(['sqft_living','price'])
-sales_data = polynomial_dataframe(sales['sqft_living'], 11)
+sales_data = polynomial_dataframe(sales['sqft_living'], 15)
 sales_data['price'] = sales['price']
 l2_penalty_best = optimal_penalty[0]
-model_best = ridge_model(l2_penalty_best, sales_data.drop('price',1), sales_data['price'])
-plot_fitted_line(5,sales_data,model_best)
+model_best = ridge_model(10, sales_data.drop('price',1), sales_data['price'])
+plot_fitted_line(9,sales_data,model_best)
+print("Optimal L2 Penalty: ", optimal_penalty)
 
-errors = model_best.predict(sales_data.drop('price',1))
+# Test Data Application
+poly_test = polynomial_dataframe(test_data['sqft_living'], 15)
+poly_test['price'] = test_data['price']
+predictions = model_best.predict(poly_test.drop('price',1))
+errors = predictions - test_data['price']
 rss = (errors*errors).sum()
-print("RSS with Optimal L2 penalty on Data set: ", rss)
+print("RSS with Optimal L2 penalty on Data set: %.4g" % rss)
