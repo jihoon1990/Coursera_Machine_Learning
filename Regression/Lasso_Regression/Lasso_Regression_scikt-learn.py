@@ -99,8 +99,8 @@ print("L1_penalty_max: ", l1_penalty_max)
 
 # Exploring Narrow Range
 validation_rss = {}
-l2_penalty_narrow = np.linspace(l1_penalty_min,l1_penalty_max, num=20)
-for l1_penalty in l2_penalty_narrow:
+l1_penalty_narrow = np.linspace(l1_penalty_min,l1_penalty_max, num=20)
+for l1_penalty in l1_penalty_narrow:
     model = linear_model.Lasso(alpha = l1_penalty, normalize = True)
     model.fit(training[all_features],training['price'])
     predictions = model.predict(validation[all_features])
