@@ -10,9 +10,7 @@ import pandas as pd
 import numpy as np
 from lasso_func import normalize_features
 from lasso_func import predict_output
-from lasso_func import lasso_coordinate_descent_step
 from lasso_func import lasso_cyclical_coordinate_descent
-from lasso_func import in_l1range
 
 dtype_dict = {'bathrooms':float, 'waterfront':int, 'sqft_above':int, 'sqft_living15':float, 'grade':int, 'yr_renovated':int, 'price':float, 'bedrooms':float, 'zipcode':str, 'long':float, 'sqft_lot15':float, 'sqft_living':float, 'floors':float, 'condition':int, 'lat':float, 'date':str, 'sqft_basement':int, 'yr_built':int, 'id':str, 'sqft_lot':int, 'view':int}
 
@@ -25,6 +23,7 @@ sales['floors'] = sales['floors'].astype(int)
 sales['constant'] = 1
 testing['constant'] = 1
 training['constant'] = 1
+
 # Coordinate Descent
 # Effect of L1 penalty
 simple_features = ['constant','sqft_living','bedrooms']
