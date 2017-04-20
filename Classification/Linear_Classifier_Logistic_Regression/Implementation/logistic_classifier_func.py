@@ -117,7 +117,7 @@ def logistic_regression_with_L2(feature_matrix, sentiment, initial_coefficients,
         # Checking whether log likelihood is increasing
         if itr <= 15 or (itr <= 100 and itr % 10 == 0) or (itr <= 1000 and itr % 100 == 0) \
         or (itr <= 10000 and itr % 1000 == 0) or itr % 10000 == 0:
-            lp = compute_log_likelihood(feature_matrix, sentiment, coefficients)
+            lp = compute_log_likelihood_with_L2(feature_matrix, sentiment, coefficients, l2_penalty)
             print('iteration %*d: log likelihood of observed labels = %.8f' % \
                 (int(np.ceil(np.log10(max_iter))), itr, lp))
     return coefficients

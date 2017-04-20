@@ -78,7 +78,6 @@ coefficients_4_penalty = logistic_regression_with_L2(feature_matrix_train, senti
 coefficients_10_penalty = logistic_regression_with_L2(feature_matrix_train, sentiment_train,
                                                       initial_coefficients=np.zeros(194),
                                                       step_size=5e-6, l2_penalty=10, max_iter=501)
-
 # run with L2 = 1e2
 coefficients_1e2_penalty = logistic_regression_with_L2(feature_matrix_train, sentiment_train,
                                                        initial_coefficients=np.zeros(194),
@@ -87,7 +86,6 @@ coefficients_1e2_penalty = logistic_regression_with_L2(feature_matrix_train, sen
 coefficients_1e3_penalty = logistic_regression_with_L2(feature_matrix_train, sentiment_train,
                                                        initial_coefficients=np.zeros(194),
                                                        step_size=5e-6, l2_penalty=1e3, max_iter=501)
-
 # run with L2 = 1e5
 coefficients_1e5_penalty = logistic_regression_with_L2(feature_matrix_train, sentiment_train,
                                                        initial_coefficients=np.zeros(194),
