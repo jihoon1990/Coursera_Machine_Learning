@@ -8,7 +8,7 @@ import string
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
-from linear_cllassifier_func import calculate_probability
+from linear_classifier_func import calculate_probability
 #------Data Cleansing------
 # Load Data
 products = pd.read_csv('amazon_baby.csv')

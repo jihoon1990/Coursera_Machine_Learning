@@ -11,7 +11,7 @@ Created on Thu Apr 20 13:29:39 2017
 import string
 import numpy as np
 import pandas as pd
-from Logistic_Regression_func import logistic_regression
+from logistic_classifier_func import logistic_regression
 
 # Load Data
 products = pd.read_csv('amazon_baby_subset.csv')
