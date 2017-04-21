@@ -11,6 +11,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import export_graphviz
 from IPython.display import Image
+from IPython.display import display
 import pydotplus
 # Load data
 loans = pd.read_csv("lending-club-data.csv")
@@ -49,12 +50,6 @@ target = 'safe_loans'                    # prediction target (y) (+1 means safe,
 # Extract the feature and target columns
 loans = loans[features+[target]]
 
-## Load index of train & validation
-train_idx = pd.read_json("train-idx.json")
-validation_idx = pd.read_json("validation-idx.json")
-train_data = loans.iloc[train_idx[0].values]
-validation_data = loans.iloc[validation_idx[0].values]
-
 safe_loans_raw = loans[loans[target] == +1]
 risky_loans_raw = loans[loans[target] == -1]
 
@@ -68,6 +63,11 @@ safe_loans = safe_loans_raw.sample(frac=percentage)
 # Append the risky_loans with the downsampled version of safe_loans
 loans_data = risky_loans.append(safe_loans)
 
+## Load index of train & validation
+train_idx = pd.read_json("train-idx.json")
+validation_idx = pd.read_json("validation-idx.json")
+train_data = loans.iloc[train_idx[0].values]
+validation_data = loans.iloc[validation_idx[0].values]
 
 # one-hot encoding
 print("Data types: \n", train_data.dtypes)
@@ -96,7 +96,7 @@ def conda_fix(graph):
 dot_data = export_graphviz(small_model,out_file=None,feature_names= train_features.columns.values, class_names=['Bad','Safe'],filled=True,rounded=True,special_characters=True)
 graph = pydotplus.graph_from_dot_data(dot_data)
 conda_fix(graph)
-Image(graph.create_png())
+display(Image(graph.create_png()))
 
 # Making predictions
 validation_safe_loans = validation_data[validation_data[target] == 1]
@@ -112,10 +112,14 @@ validation_features = validation_one_encoded.drop('safe_loans',axis=1)
 sample_validation_features = validation_features.loc[sample_validation_data.index]
 # prediction
 print("Predictions with max_depth = 6 (Class): ", decision_tree_model.predict(sample_validation_features))
-print("Predictions with max_depth = 6 (Prob): ", decision_tree_model.predict_proba(sample_validation_features))
+decision_prob = pd.DataFrame(decision_tree_model.predict_proba(sample_validation_features))
+decision_prob = decision_prob.rename(columns={0:'RISKY',1:'SAFE'})
+print("Predictions with max_depth = 6 (Prob): \n", decision_prob)
 
 print("Predictions with max_depth = 4 (Class): ", small_model.predict(sample_validation_features))
-print("Predictions with max_depth = 4 (Prob): ", small_model.predict_proba(sample_validation_features))
+small_prob = pd.DataFrame(small_model.predict_proba(sample_validation_features))
+small_prob = small_prob.rename(columns={0:'RISKY',1:'SAFE'})
+print("Predictions with max_depth = 4 (Prob): \n", small_prob)
 
 # Accuracy
 print("Accuracy (Depth: 6, TRAIN DATA): %.4g" %decision_tree_model.score(train_features,train_data['safe_loans']))
@@ -134,7 +138,7 @@ predictions = decision_tree_model.predict(validation_features)
 dot_data = export_graphviz(decision_tree_model,out_file=None,feature_names= validation_features.columns.values, class_names=['Bad','Safe'],filled=True,rounded=True,special_characters=True)
 graph = pydotplus.graph_from_dot_data(dot_data)
 conda_fix(graph)
-Image(graph.create_png())
+display(Image(graph.create_png()))
 
 print("Number of Samples: ", len(predictions))
 false_positives = (validation_data[validation_data['safe_loans'] != predictions]['safe_loans'] == -1).sum()
