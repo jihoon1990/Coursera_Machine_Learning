@@ -94,10 +94,10 @@ coefficients_1e5_penalty = logistic_regression_with_L2(feature_matrix_train, sen
 # Compare coefficients
 table = pd.DataFrame(feature_set)
 table = table.rename(columns={0:'words'})
+
 def add_coefficients_to_table(coefficients, column_name):
     table[column_name] = coefficients
     return table
-
 
 add_coefficients_to_table(coefficients_0_penalty, 'coefficients [L2=0]')
 add_coefficients_to_table(coefficients_4_penalty, 'coefficients [L2=4]')
