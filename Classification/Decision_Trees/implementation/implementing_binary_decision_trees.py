@@ -34,6 +34,7 @@ target = 'safe_loans'
 
 # Extract the feature and target columns
 loans = loans[features+[target]]
+
 safe_loans_raw = loans[loans[target] == +1]
 risky_loans_raw = loans[loans[target] == -1]
 
@@ -47,7 +48,7 @@ safe_loans = safe_loans_raw.sample(frac=percentage)
 # Append the risky_loans with the downsampled version of safe_loans
 loans_data = risky_loans.append(safe_loans)
 
-## Load index of train & test
+## Load train & test
 train_idx = pd.read_json("train-idx.json")
 test_idx = pd.read_json("test-idx.json")
 train_data = loans.iloc[train_idx[0].values]
