@@ -109,9 +109,9 @@ print("validation_set, classification error (model 1):", evaluate_classification
 print("validation_set, classification error (model 2):", evaluate_classification_error(model_2, validation_data, target))
 print("validation_set, classification error (model 3):", evaluate_classification_error(model_3, validation_data, target))
 
-print("Number of nodes (model 1):", count_leaves(model_1))
-print("Number of nodes (model 2):", count_leaves(model_2))
-print("Number of nodes (model 3):", count_leaves(model_3))
+print("Number of leaves (model 1):", count_leaves(model_1))
+print("Number of leaves (model 2):", count_leaves(model_2))
+print("Number of leaves (model 3):", count_leaves(model_3))
 
 # Exploring the effect of min_error
 print("==========EFFECT OF MIN_ERROR==========")
@@ -131,9 +131,9 @@ print("Validation data, classification error (model 4):", evaluate_classificatio
 print("Validation data, classification error (model 5):", evaluate_classification_error(model_5, validation_data, target))
 print("Validation data, classification error (model 6):", evaluate_classification_error(model_6, validation_data, target))
 
-print("Number of nodes (model 4):", count_leaves(model_4))
-print("Number of nodes (model 5):", count_leaves(model_5))
-print("Number of nodes (model 6):", count_leaves(model_6))
+print("Number of leaves (model 4):", count_leaves(model_4))
+print("Number of leaves (model 5):", count_leaves(model_5))
+print("Number of leaves (model 6):", count_leaves(model_6))
 
 # Exploring the effect of min_node_size
 print("==========EFFECT OF MIN_NODE_SIZE==========")
@@ -154,6 +154,6 @@ print("Validation data, classification error (model 7):", evaluate_classificatio
 print("Validation data, classification error (model 8):", evaluate_classification_error(model_8, validation_data, target))
 print("Validation data, classification error (model 9):", evaluate_classification_error(model_9, validation_data, target))
 
-print("Number of nodes (model 7):", count_leaves(model_7))
-print("Number of nodes (model 8):", count_leaves(model_8))
-print("Number of nodes (model 9):", count_leaves(model_9))
+print("Number of leaves (model 7):", count_leaves(model_7))
+print("Number of leaves (model 8):", count_leaves(model_8))
+print("Number of leaves (model 9):", count_leaves(model_9))
