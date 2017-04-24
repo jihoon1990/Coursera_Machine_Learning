@@ -142,7 +142,7 @@ def make_figure(dim, title, xlabel, ylabel, legend):
     plt.rcParams.update({'font.size': 16})
     plt.tight_layout()
 
-# Training Erros
+# Training Errors
 train_err_10 = 1 - ensemble_classifier_est_10.score(train_features,train_data['safe_loans'])
 train_err_50 = 1 - ensemble_classifier_est_50.score(train_features,train_data['safe_loans'])
 train_err_100 = 1 - ensemble_classifier_est_100.score(train_features,train_data['safe_loans'])
@@ -150,6 +150,7 @@ train_err_200 = 1 - ensemble_classifier_est_200.score(train_features,train_data[
 train_err_500 = 1 - ensemble_classifier_est_500.score(train_features,train_data['safe_loans'])
 training_errors = [train_err_10, train_err_50, train_err_100, train_err_200, train_err_500]
 
+# Validation Errors
 validation_err_10 = 1 - ensemble_classifier_est_10.score(validation_features,validation_data['safe_loans'])
 validation_err_50 = 1 - ensemble_classifier_est_50.score(validation_features,validation_data['safe_loans'])
 validation_err_100 = 1 - ensemble_classifier_est_100.score(validation_features,validation_data['safe_loans'])
