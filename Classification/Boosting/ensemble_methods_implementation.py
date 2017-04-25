@@ -19,6 +19,7 @@ from boosting_func import evaluate_classification_error
 from boosting_func import adaboost_with_tree_stumps
 from boosting_func import predict_adaboost
 
+
 # Load Data
 loans = pd.read_csv("lending-club-data.csv")
 
