@@ -62,6 +62,11 @@ print(train_data.head(5))
 # Explore test_data
 print(test_data.head(5))
 
+print("Number of Safe Loans in TRAIN DATA: ", (train_data['safe_loans']==1).sum())
+print("Number of Bad Loans in TRAIN DATA: ", (train_data['safe_loans']==-1).sum())
+print("Number of Safe Loans in TEST DATA: ", (test_data['safe_loans']==1).sum())
+print("Number of Bad Loans in TEST DATA: ", (test_data['safe_loans']==-1).sum())
+
 # Example: Training a weighted decision tree
 example_data_weights = [1.] * 10 + [0.]*(len(train_data) - 20) + [1.] * 10
 small_data_decision_tree_subset_20 = weighted_decision_tree_create(train_data, features, target,
@@ -74,10 +79,6 @@ evaluate_classification_error(small_data_decision_tree_subset_20, train_data, ta
 # Implementing your own Adaboost (on decision stumps)
 stump_weights, tree_stumps = adaboost_with_tree_stumps(train_data, features, 
                                 target, num_tree_stumps=10)
-
-# Training a boosted ensemble of 15 stumps
-stump_weights, tree_stumps = adaboost_with_tree_stumps(train_data, features, 
-                                target, num_tree_stumps=15)
 
 # Making predictions
 predictions = predict_adaboost(stump_weights, tree_stumps, test_data)
