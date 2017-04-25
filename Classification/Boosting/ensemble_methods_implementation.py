@@ -85,7 +85,7 @@ predictions = predict_adaboost(stump_weights, tree_stumps, test_data)
 
 # Performance plots
 stump_weights, tree_stumps = adaboost_with_tree_stumps(train_data, 
-                                 features, target, num_tree_stumps=10)
+                                 features, target, num_tree_stumps=30)
 
 # Computing training error at the end of each iteration
 error_all = []
