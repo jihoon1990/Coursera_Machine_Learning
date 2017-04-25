@@ -6,7 +6,6 @@ Created on Mon Apr 24 14:12:52 2017
 """
 
 # Boosting Functions
-import numpy as np
 import pandas as pd
 
 def intermediate_node_weighted_mistakes(labels_in_node, data_weights):
