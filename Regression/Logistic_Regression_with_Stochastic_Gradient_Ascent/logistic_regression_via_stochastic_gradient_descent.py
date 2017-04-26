@@ -95,25 +95,6 @@ gradient_mini_batch = feature_derivative(errors, feature_matrix_train[i:i+B,j])
 print("Gradient mini-batch data points: %s" % gradient_mini_batch)
 print("                --> Should print 1.0")
 
-
-# Implementing stochastic gradient ascent
-sample_feature_matrix = np.array([[1.,2.,-1.], [1.,0.,1.]])
-sample_sentiment = np.array([+1, -1])
-
-coefficients, log_likelihood = logistic_regression_SG(sample_feature_matrix, sample_sentiment, np.zeros(3),
-                                                  step_size=1., batch_size=2, max_iter=2)
-print('-------------------------------------------------------------------------------------')
-print('Coefficients learned                 :', coefficients)
-print('Average log likelihood per-iteration :', log_likelihood)
-if np.allclose(coefficients, np.array([-0.09755757,  0.68242552, -0.7799831]), atol=1e-3)\
-  and np.allclose(log_likelihood, np.array([-0.33774513108142956, -0.2345530939410341])):
-    # pass if elements match within 1e-3
-    print('-------------------------------------------------------------------------------------')
-    print('Test passed!')
-else:
-    print('-------------------------------------------------------------------------------------')
-    print('Test failed')
-    
 # Running gradient ascent using the stochastic gradient ascent implementation
 coefficients, log_likelihood = logistic_regression_SG(feature_matrix_train, sentiment_train,
                                         initial_coefficients=np.zeros(194),
