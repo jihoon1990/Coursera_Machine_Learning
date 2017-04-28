@@ -6,3 +6,4 @@ Created on Fri Apr 28 18:29:16 2017
 """
 
 # Gaussian Mixture Model to Text Data
+
