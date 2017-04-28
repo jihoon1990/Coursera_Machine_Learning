@@ -14,3 +14,4 @@ import matplotlib.pyplot as plt
 import copy
 from scipy.stats import multivariate_normal
 from gmm_with_em_func import generate_MoG_data
+# Initialization of parameters
