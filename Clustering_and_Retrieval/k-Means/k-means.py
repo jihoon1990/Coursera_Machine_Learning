@@ -21,7 +21,6 @@ from k_means_func import plot_heterogeneity
 from k_means_func import smart_initialize
 from k_means_func import plot_k_vs_heterogeneity
 from k_means_func import visualize_document_clusters
-from scipy.sparse import csr_matrix                  # sparse matrices
 from sklearn.preprocessing import normalize          # normalizing vectors
 from sklearn.metrics import pairwise_distances       # pairwise distances
 import sys      
@@ -40,60 +39,13 @@ map_index_to_word = map_index_to_word.sort_values()
 # normalize tf-idf
 tf_idf = normalize(tf_idf)
 
+
 # Get the TF-IDF vectors for documents 100 through 102.
 queries = tf_idf[100:102,:]
 
-# Assigning clusters. 
 # Compute pairwise distances from every data point to each query vector.
 dist = pairwise_distances(tf_idf, queries, metric='euclidean')
-
-# Checkpoint:
-    
-# Students should write code here
-first_3_centroids = tf_idf[:3,:]
-distances = pairwise_distances(tf_idf, first_3_centroids, metric='euclidean')
-dist = distances[430, 1]
-
-'''Test cell'''
-if np.allclose(dist, pairwise_distances(tf_idf[430,:], tf_idf[1,:])):
-    print('Pass')
-else:
-    print('Check your code again')
-    
-# Checkpoint: 
-
-# Students should write code here
-distances = distances.copy()
-closest_cluster = np.argmin(distances, axis=1)
-print(closest_cluster)
-print(closest_cluster.shape)
-
-'''Test cell'''
-reference = [list(row).index(min(row)) for row in distances]
-if np.allclose(closest_cluster, reference):
-    print('Pass')
-else:
-    print('Check your code again')
-    
-# Checkpoint: 
-# Students should write code here
-first_3_centroids = tf_idf[:3,:]
-distances = pairwise_distances(tf_idf, first_3_centroids, metric='euclidean')
-cluster_assignment = np.argmin(distances, axis=1)
-
-if len(cluster_assignment)==59071 and \
-   np.array_equal(np.bincount(cluster_assignment), np.array([23061, 10086, 25924])):
-    print('Pass') # count number of data points for each cluster
-else:
-    print('Check your code again.')
-    
-
-# Checkpoint:
-if np.allclose(assign_clusters(tf_idf[0:100:10], tf_idf[0:8:2]), np.array([0, 1, 1, 0, 0, 2, 0, 2, 2, 1])):
-    print('Pass')
-else:
-    print('Check your code again.')
-    
+ 
 # Revising clusters
 data = np.array([[1., 2., 0.],
                  [0., 0., 0.],
@@ -109,14 +61,6 @@ print(data[cluster_assignment==0])
 
 print(data[cluster_assignment==0].mean(axis=0))
 
-# Check point
-result = revise_centroids(tf_idf[0:100:10], 3, np.array([0, 1, 1, 0, 0, 2, 0, 2, 2, 1]))
-if np.allclose(result[0], np.mean(tf_idf[[0,30,40,60]].toarray(), axis=0)) and \
-   np.allclose(result[1], np.mean(tf_idf[[10,20,90]].toarray(), axis=0))   and \
-   np.allclose(result[2], np.mean(tf_idf[[50,70,80]].toarray(), axis=0)):
-    print('Pass')
-else:
-    print('Check your code')
     
 # Assessing convergence
 
@@ -147,6 +91,7 @@ for seed in [0, 20000, 40000, 60000, 80000, 100000, 120000]:
 end = time.time()
 print(end-start)
 
+# smart initialization
 k = 10
 heterogeneity_smart = {}
 start = time.time()
@@ -225,11 +170,7 @@ visualize_document_clusters(wiki, tf_idf, centroids[2], cluster_assignment[2], 2
 
 k = 10
 visualize_document_clusters(wiki, tf_idf, centroids[k], cluster_assignment[k], k, map_index_to_word)
-
 np.bincount(cluster_assignment[10])
-
-
 visualize_document_clusters(wiki, tf_idf, centroids[25], cluster_assignment[25], 25, map_index_to_word, display_content=False) # turn off text for brevity
-
-k=100
+k = 100
 visualize_document_clusters(wiki, tf_idf, centroids[k], cluster_assignment[k], k, map_index_to_word, display_content=False) # turn off text for brevity -- turn it on if you are curious ;)
