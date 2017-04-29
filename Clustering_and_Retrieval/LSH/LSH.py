@@ -46,6 +46,7 @@ powers_of_two = (1 << np.arange(15, -1, -1))
 print("Index bits: ", index_bits)
 print("Power of two: ", powers_of_two)       # [32768, 16384, 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1]
 print(index_bits.dot(powers_of_two))
+
 index_bits = corpus.dot(random_vectors) >= 0
 print(index_bits.dot(powers_of_two))
 
@@ -80,7 +81,6 @@ print(docs)
 obama_tf_idf = corpus[35817,:]
 biden_tf_idf = corpus[24478,:]
 
-
 # Cosine distance from Obama
 print('=========Cosine distance from Barack Obama========')
 print('Barack Obama - {0:24s}: {1:f}'.format('Joe Biden', cosine_distance(obama_tf_idf, biden_tf_idf)))
@@ -104,7 +104,6 @@ LSH_obama['distance'] = query(corpus[35817,:], model, k=10, max_search_radius=3)
 print("Query: Obama \n", LSH_obama)
 
 # Experimenting with your LSH implementation
-
 print(wiki[wiki['name']=='Barack Obama'])
 
 num_candidates_history = []
@@ -160,8 +159,6 @@ plt.legend(loc='best', prop={'size':15})
 plt.rcParams.update({'font.size':16})
 plt.tight_layout()
 
-
-#
 for i, v in enumerate(average_distance_from_query_history):
     if v <= 0.78:
         print(i, v)
@@ -189,7 +186,6 @@ for i, ix in enumerate(np.random.choice(corpus.shape[0], num_queries, replace=Fa
         # precision = (# of neighbors both in result and ground_truth)/10.0
         precision[r].append(len(set(result.index) & ground_truth)/10.0)
         average_distance[r].append(result['distance'][1:].mean())
-        
 # Plot
 plt.figure(figsize=(7,4.5))
 plt.plot(range(1,17), [np.mean(average_distance[i]) for i in range(1,17)], linewidth=4, label='Average over 10 neighbors')
@@ -246,7 +242,6 @@ for num_vector in range(5,20):
         num_candidates_history[num_vector].append(num_candidates)
 
 # Plot
-
 plt.figure(figsize=(7,4.5))
 plt.plot(range(5,20), [np.mean(average_distance[i]) for i in range(5,20)], linewidth=4, label='Average over 10 neighbors')
 plt.xlabel('# of random vectors')
