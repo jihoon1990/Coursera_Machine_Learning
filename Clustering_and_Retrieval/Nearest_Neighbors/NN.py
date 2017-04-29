@@ -49,21 +49,24 @@ print("Obama words: \n", obama_words.head(10))
 wiki[wiki['name']=='Francisco Barrio']
 
 distances, indices = model.kneighbors(word_count_by_name(wiki,word_count,'Francisco Barrio'), n_neighbors=10)
-nn_obama = wiki.loc[indices[0]]
-nn_obama['distance'] = distances[0]
-nn_obama[['name','distance']]
+nn_barrio = wiki.loc[indices[0]]
+nn_barrio['distance'] = distances[0]
+nn_barrio[['name','distance']]
+print("10 Nearest neightbor of Barrio: \n", nn_barrio[['name','distance']])
 
 barrio_words = pd.DataFrame(word_count_by_name(wiki,word_count,'Francisco Barrio').toarray()[0],index=idx_to_word.index,columns=['count'])
 barrio_words = barrio_words.sort_values(by='count',ascending=False)
 print("Barrio words: \n", barrio_words.head(10))
+
+# Combined Word
 combined_words = obama_words.join(barrio_words,rsuffix='.1')
 # Rename Columns
 combined_words = combined_words.rename(columns={'count':'Obama','count.1':'Barrio'})
 # Sort by obama
 combined_words = combined_words.sort_values(by='Obama', ascending = False)
 print("Combined words: \n", combined_words)
+
 # Distance
-# Obama and Bush
 print("Distance between Obama and George W. Bush: \n", euclidean_distances(word_count_by_name(wiki,word_count,'Barack Obama'),word_count_by_name(wiki,word_count,'George W. Bush')))
 print("Distance between Obama and Joe Biden: \n", euclidean_distances(word_count_by_name(wiki,word_count,'Barack Obama'),word_count_by_name(wiki,word_count,'Joe Biden')))
 print("Distance between George W. Bush and Joe Biden: \n", euclidean_distances(word_count_by_name(wiki,word_count,'Joe Biden'),word_count_by_name(wiki,word_count,'George W. Bush')))
@@ -80,17 +83,19 @@ print("Obama info: ", wiki[wiki['name']=='Barack Obama'])
 distances, indices = model.kneighbors(word_count_by_name(wiki,tf_idf,'Barack Obama'), n_neighbors=100)
 nn_obama = wiki.loc[indices[0]]
 nn_obama['distance'] = distances[0]
-print("10 Nearest neightbor of Barack Obama: \n", nn_obama[['name','distance','length']])
+print("10 Nearest neightbor of Barack Obama: \n", nn_obama[['name','distance']])
 
 # Barack Obama word count table
 obama_words = pd.DataFrame(word_count_by_name(wiki,tf_idf,'Barack Obama').toarray()[0],index=idx_to_word.index,columns=['weight'])
 obama_words = obama_words.sort_values(by='weight',ascending=False)
 print("Obama words: \n", obama_words.head(10))
 
-# Barack Obama word count table
+# Schiliro Obama word count table
 schiliro_words = pd.DataFrame(word_count_by_name(wiki,tf_idf,'Phil Schiliro').toarray()[0],index=idx_to_word.index,columns=['weight'])
 schiliro_words = schiliro_words.sort_values(by='weight',ascending=False)
 print("Schiliro words: \n", schiliro_words.head(10))
+
+# combined words
 combined_words = obama_words.join(schiliro_words,rsuffix='.1')
 # Rename Columns
 combined_words = combined_words.rename(columns={'weight':'Obama','weight.1':'Barrio'})
@@ -124,7 +129,7 @@ plt.rcParams.update({'font.size':16})
 plt.tight_layout()
 
 # Now, apply cosine distance
-# NN model
+# cosine distance model
 model_cosine= NearestNeighbors(metric='cosine', algorithm = 'brute')
 model_cosine.fit(tf_idf)
 # row number of Obama's article
