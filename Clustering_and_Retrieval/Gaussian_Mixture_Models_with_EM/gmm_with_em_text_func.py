@@ -18,7 +18,7 @@ def load_sparse_csr(filename):
     indptr = loader['indptr']
     shape = loader['shape']
     
-    return csr_matrix( (data, indices, indptr), shape)
+    return csr_matrix((data, indices, indptr), shape)
 
 def diag(array):
     n = len(array)
@@ -122,4 +122,4 @@ def visualize_EM_clusters(tf_idf, means, covs, map_index_to_word):
             print('{0: <12}{1:<10.2e}{2:10.2e}'.format(map_index_to_word.index[i], 
                                                        means[c][i],
                                                        covs[c][i]))
-        print('\n=====================================================Quiz Question. Select all the topics that have a cluster in the model created above. [multiple choice]====')
+        print('\n=====================================================')

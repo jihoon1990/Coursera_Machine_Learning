@@ -16,9 +16,7 @@ from gmm_with_em_text_func import diag
 from gmm_with_em_text_func import EM_for_high_dimension
 from gmm_with_em_text_func import visualize_EM_clusters
 
-from scipy.stats import multivariate_normal
 from sklearn.cluster import KMeans
-
 from sklearn.preprocessing import normalize
 
 # Load Data
@@ -31,8 +29,6 @@ tf_idf = normalize(tf_idf)
 # load index to word map
 idx_to_word = pd.read_json("map_index_to_word.json", typ='series')
 idx_to_word = idx_to_word.sort_values()
-
-
 
 np.random.seed(5)
 num_clusters = 25
@@ -97,10 +93,9 @@ for k in range(num_clusters):
     random_means.append(mean)
     random_covs.append(cov)
     random_weights.append(weight)
-    
-# Question
+
+# Try fitting EM with the random initial parameters you created above
 out_random_init = EM_for_high_dimension(tf_idf, random_means, random_covs, random_weights, cov_smoothing=1e-5)
 out_random_init['loglik']
-
-# Question
+#  For the above model, out_random_init, use the visualize_EM_clustersmethod you created above.
 visualize_EM_clusters(tf_idf, out_random_init['means'], out_random_init['covs'], idx_to_word)
