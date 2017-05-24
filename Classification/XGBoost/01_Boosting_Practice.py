@@ -6,13 +6,8 @@ Created on Wed May 24 13:30:12 2017
 @contact: jioon_kim@outlook.com
 """
 
-import numpy as np
-import subprocess
-import os
 
 from collections import Counter
-
-from IPython.display import Image
 
 from sklearn.datasets import make_classification
 from sklearn.cross_validation import train_test_split
