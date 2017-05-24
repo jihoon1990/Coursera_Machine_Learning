@@ -1,0 +1,8 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="X[3] <= -0.5984\nfriedman_mse = 0.2274\nsamples = 800\nvalue = 0.0"] ;
+1 [label="friedman_mse = 0.1338\nsamples = 299\nvalue = 1.1836"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="friedman_mse = 0.2014\nsamples = 501\nvalue = -0.7022"] ;
+0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+}
