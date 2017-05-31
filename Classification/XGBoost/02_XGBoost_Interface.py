@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-XGBoost Interface
-Created on Thu May 25 11:21:48 2017
-
-@author: Jihoon_Kim
-@contact: jioon_kim@outlook.com
-"""
 
 import numpy as np
 import xgboost as xgb

@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed May 31 17:09:13 2017
-
-"""
 
 # Bias/Variance Trade-off
 

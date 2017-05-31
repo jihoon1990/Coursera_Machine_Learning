@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed May 31 17:00:41 2017
-"""
-
 
 import xgboost as xgb
 import seaborn as sns

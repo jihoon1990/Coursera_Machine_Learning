@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Scikit-learn Interface
-Created on Thu May 25 12:37:24 2017
-
-@author: Jihoon_Kim
-@contact: jioon_kim@outlook.com
-"""
 
 import numpy as np
 
