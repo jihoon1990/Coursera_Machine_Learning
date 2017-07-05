@@ -1,7 +1,10 @@
 # Machine Learning
 
-This repository is composed of a set of machine learning algorithms with application to real-world problems.
+This project is based on the specialization course "Machine Learning", provided by the University of Washington with Coursera.
 
-Most of the algorithm is based on the lecture "Machine Learning Specialization", provided by the University of Washington. 
+1. Machine Learning Foundations: A Case Study Approach
+2. Machine Learning: Regression
+3. Machine Learning: Classification
+4. Machine Learning: Clustering & Retrieval
 
-This project is based on open-source packages such as, **`Numpy`, `Scipy`, `Pandas`** and **`Scikit-learn`**, unlike original materials, which uses modeling tool as **Graphlab Create<sup>TM</sup>**.
+Original contents are heavily based on ‘Graphlab Create’, the modeling tool for machine learning developed as ‘turi’. I refactored all the contents to be implemented with open-source packages such as 'Numpy', 'Scipy', 'Pandas' and 'Scikit-learn'.
