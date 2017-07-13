@@ -1,4 +1,4 @@
-# Machine Learning
+# Machine Learning Technique Implementation from Scratch
 
 <img src="http://jihoon-kim.synology.me/wp-content/uploads/2017/05/ML_Univ_of_W-768x197.jpg">
 
